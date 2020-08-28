@@ -1,13 +1,13 @@
-import React, { Component } from 'react';
-import { Route, Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import dummyStore from '../dummy-store';
+import React, {Component} from 'react';
+import {Route, Link} from 'react-router-dom';
+import {FontAwesomeIcon} from '@fortawesome/react-fontawesome';
 import NoteListNav from '../NoteListNav/NoteListNav';
-import NotePageMain from '../NotePageMain/NotePageMain'
 import NotePageNav from '../NotePageNav/NotePageNav';
 import NoteListMain from '../NoteListMain/NoteListMain';
-import './App.css';
+import NotePageMain from '../NotePageMain/NotePageMain';
+import dummyStore from '../dummy-store';
 import {getNotesForFolder, findNote, findFolder} from '../notes-helpers';
+import './App.css';
 
 class App extends Component {
   state = {
@@ -41,7 +41,7 @@ class App extends Component {
         ))}
           
           <Route 
-            path='note/:noteId'
+            path='/note/:noteId'
             render={routeProps => {
               const {noteId} = routeProps.match.params;
               const note= findNote(notes, noteId) || {};
@@ -50,19 +50,21 @@ class App extends Component {
             }}
           />
 
-          <Route path='/add-folder' component={NotePageNav} />
-          <Route path='/add-note' component={NotePageNav} />
+          <Route path='/add-folder' 
+            component={NotePageNav} />
+          <Route path='/add-note' 
+            component={NotePageNav} />
 
         </>
     );
           }
 
   renderMainRoutes() {
-    const {notes} = this.state;
+    const {notes, folders} = this.state;
     return (
       <>
 
-        {['/', '/folder/:folder.id'].map(path => (
+        {['/', '/folder/:folderId'].map(path => (
           <Route 
             exact
             key={path}
@@ -84,7 +86,7 @@ class App extends Component {
         ))}
 
           <Route
-            path='/note/:note.id'
+            path='/note/:noteId'
             render={routeProps => {
               const {noteId} = routeProps.match.params;
               const note = findNote(notes, noteId);
