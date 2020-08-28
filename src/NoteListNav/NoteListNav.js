@@ -8,7 +8,7 @@ import './NoteListNav.css'
 export default function NoteListNav(props) {
     return (
         <div className='NoteListNav'>
-            <ul className='NoteListNav__List'>
+            <ul className='NoteListNav__list'>
                 {props.folders.map(folder =>
                     <li key={folder.id}>
                         <NavLink 
