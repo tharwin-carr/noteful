@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
-import ApiContext from './ApiContext'
-import NotefulForm from './NotefulForm/NotefulForm'
+import ApiContext from '../ApiContext'
+import NotefulForm from '../NotefulForm/NotefulForm'
+import config from '../config'
+import PropTypes from 'prop-types'
+import './AddFolder.css'
 
-export class AddFolder extends Component {
+class AddFolder extends Component {
     static defaultProps = {
         history: {
             push: () => { },
@@ -14,7 +17,7 @@ export class AddFolder extends Component {
     handleSubmit(event) {
         event.preventDefault();
         const folder = {
-            name: e.target['folder-section'].value
+            name: event.target['folder-section'].value
         }
         fetch(`${config.API_ENDPOINT}/folders`, {
             method: 'POST',
