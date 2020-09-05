@@ -3,6 +3,7 @@ import { NavLink, Link } from 'react-router-dom'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import CircleButton from '../CircleButton/CircleButton'
 import ApiContext from '../ApiContext'
+import PropTypes from 'prop-types'
 import { countNotesForFolder } from '../notes-helpers'
 import './NoteListNav.css'
 
@@ -43,4 +44,8 @@ export default class NoteListNav extends React.Component {
       </div>
     )
   }
+}
+
+NoteListNav.propTypes = {
+  folders: PropTypes.array
 }
