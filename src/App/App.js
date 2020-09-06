@@ -8,6 +8,7 @@ import NotePageMain from '../NotePageMain/NotePageMain';
 import AddFolder from '../AddFolder/AddFolder';
 import AddNote from '../AddNote/AddNote';
 import ApiContext from '../ApiContext';
+import ErrorBoundary from '../ErrorBoundary'
 import config from '../config';
 import './App.css';
 
@@ -107,7 +108,7 @@ class App extends Component {
             
         };
         return (
-            
+            <ErrorBoundary>            
                 <ApiContext.Provider value={contextValue}>
                     <div className="App">
                         <nav className="App__nav">{this.renderNavRoutes()}</nav>
@@ -120,8 +121,7 @@ class App extends Component {
                         <main className="App__main">{this.renderMainRoutes()}</main>
                     </div>
                 </ApiContext.Provider>
-            
-            
+            </ErrorBoundary>            
         );
     }
 }
