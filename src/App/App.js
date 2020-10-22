@@ -55,8 +55,7 @@ class App extends Component {
         this.setState({
             notes: [...this.state.notes, note]
         })
-    }
-    
+    }    
 
     renderNavRoutes() {
         return (
@@ -104,9 +103,9 @@ class App extends Component {
             folders: this.state.folders,
             addFolder: this.addFolder,
             addNote: this.addNote,
-            deleteNote: this.handleDeleteNote
-            
-        };
+            deleteNote: this.handleDeleteNote,
+    }
+    
         return (
             <ErrorBoundary>            
                 <ApiContext.Provider value={contextValue}>
