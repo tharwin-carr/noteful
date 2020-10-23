@@ -1,3 +1,3 @@
 export default {
-    API_ENDPOINT: process.env.API_ENDPOINT,
+    API_ENDPOINT: `https://postgresql-polished-93349.herokuapp.com`
   }
