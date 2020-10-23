@@ -1,3 +1,3 @@
 export default {
-    API_ENDPOINT: `https://postgresql-polished-93349.herokuapp.com`
+    API_ENDPOINT: `https://safe-sands-71659.herokuapp.com`
   }
