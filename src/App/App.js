@@ -59,25 +59,30 @@ class App extends Component {
 
     renderNavRoutes() {
         return (
-            <>
-                {['/', '/folder/:folderId'].map(path => (
-                    <Route
-                        exact
-                        key={path}
-                        path={path}
-                        component={NoteListNav}
-                    />
-                ))}
-                <Route path="/note/:noteId" component={NotePageNav} />
-                {
-                    ['/add-folder', '/add-note'].map(path => (
-                        <Route path={path}
-                        component={NotePageNav} />
-                    ))
-                }
-                </>
-        );
-            }
+          <>
+            {['/', '/folder/:folderId'].map(path =>
+              <Route
+                exact
+                key={path}
+                path={path}
+                component={NoteListNav}
+              />
+            )}
+            <Route
+              path='/note/:noteId'
+              component={NotePageNav}
+            />
+            <Route
+              path='/add-folder'
+              component={NotePageNav}
+            />
+            <Route
+              path='/add-note'
+              component={NotePageNav}
+            />
+          </>
+        )
+      }
 
     renderMainRoutes() {
         return (
