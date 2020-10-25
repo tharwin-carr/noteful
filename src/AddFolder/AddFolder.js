@@ -1,3 +1,4 @@
+
 import React, { Component } from 'react'
 import ValidationError from '../ValidationError'
 import ApiContext from '../ApiContext'
@@ -87,5 +88,5 @@ export default class AddFolder extends Component {
 
 AddFolder.propTypes = {
     history: PropTypes.object,
-    title: PropTypes.string.isRequired
+    title: PropTypes.string
 }
