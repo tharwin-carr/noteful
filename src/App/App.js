@@ -8,7 +8,6 @@ import NotePageMain from '../NotePageMain/NotePageMain';
 import AddFolder from '../AddFolder/AddFolder';
 import AddNote from '../AddNote/AddNote';
 import ApiContext from '../ApiContext';
-import ErrorBoundary from '../ErrorBoundary'
 import config from '../config';
 import './App.css';
 
@@ -39,9 +38,9 @@ class App extends Component {
             });
     }
 
-    handleDeleteNote = noteId => {
+    handleDeleteNote = note_id => {
         this.setState({
-            notes: this.state.notes.filter(note => note.id !== noteId)
+            notes: this.state.notes.filter(note => note.id !== note_id)
         });
     };
 
@@ -60,7 +59,7 @@ class App extends Component {
     renderNavRoutes() {
         return (
           <>
-            {['/', '/folder/:folderId'].map(path =>
+            {['/', '/folder/:folder_id'].map(path =>
               <Route
                 exact
                 key={path}
@@ -69,7 +68,7 @@ class App extends Component {
               />
             )}
             <Route
-              path='/note/:noteId'
+              path='/note/:note_id'
               component={NotePageNav}
             />
             <Route
@@ -87,7 +86,7 @@ class App extends Component {
     renderMainRoutes() {
         return (
             <>
-                {['/', '/folder/:folderId'].map(path => (
+                {['/', '/folder/:folder_id'].map(path => (
                     <Route
                         exact
                         key={path}
@@ -95,7 +94,7 @@ class App extends Component {
                         component={NoteListMain}
                     />
                 ))}
-                <Route path="/note/:noteId" component={NotePageMain} />
+                <Route path="/note/:note_id" component={NotePageMain} />
                 <Route path='/add-note' component={AddNote} />
                 <Route path='/add-folder' component={AddFolder} />
             </>
@@ -111,8 +110,7 @@ class App extends Component {
             deleteNote: this.handleDeleteNote,
     }
     
-        return (
-            <ErrorBoundary>            
+        return (            
                 <ApiContext.Provider value={contextValue}>
                     <div className="App">
                         <nav className="App__nav">{this.renderNavRoutes()}</nav>
@@ -124,8 +122,7 @@ class App extends Component {
                         </header>
                         <main className="App__main">{this.renderMainRoutes()}</main>
                     </div>
-                </ApiContext.Provider>
-            </ErrorBoundary>            
+                </ApiContext.Provider>          
         );
     }
 }

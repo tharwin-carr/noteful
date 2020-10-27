@@ -10,7 +10,7 @@ export default class AddNote extends Component {
     static contextType = ApiContext
 
     state = {
-      noteName: {
+      notetitle: {
         value: "",
         touched: false
       },
@@ -20,21 +20,21 @@ export default class AddNote extends Component {
       }
     }
 
-  updateNoteName(noteName) {
+  updateNotetitle(notetitle) {
     this.setState({
-      noteName: {
-        value: noteName,
+      notetitle: {
+        value: notetitle,
         touched: true
       }
     });
   }
 
-  validateNoteName() {
-    const noteName = this.state.noteName.value.trim();
-    if (noteName.length === 0) {
-      return "Note name is required";
-    } else if (noteName.length < 3) {
-      return "Note name must be at least 3 characters long"
+  validateNotetitle() {
+    const notetitle = this.state.notetitle.value.trim();
+    if (notetitle.length === 0) {
+      return "Note title is required";
+    } else if (notetitle.length < 3) {
+      return "Note title must be at least 3 characters long"
     }
   }
 
@@ -50,12 +50,12 @@ export default class AddNote extends Component {
   handleSubmit = e => {
     e.preventDefault()
     const note = {
-      name: e.target.name.value,
-      content: e.target.content.value,
-      folderId: e.target.folderId.value,
+      title: e.target['title-section'].value,
+      content: e.target['content'].value,
+      folder_id: e.target['folder-select'].value,
       modified: new Date(),
     }
-    if (this.validateNoteName()) {
+    if (this.validateNotetitle()) {
       return
     }
     fetch(
@@ -83,23 +83,23 @@ export default class AddNote extends Component {
                 <NotefulForm onSubmit={this.handleSubmit}>
                     <h2>Create a Note</h2>
                     <div>
-                        <label htmlFor='name'>Name</label>
+                        <label htmlFor='title'>Title</label>
                         <input 
                             type='text'
-                            name='name'
-                            id='name'
-                            onChange= {e => this.updateNoteName(e.target.value)}
+                            name='title-section'
+                            id='title'
+                            onChange= {e => this.updateNotetitle(e.target.value)}
                         />
-                        {this.state.noteName.touched && <ValidationError message={this.validateNoteName()} />}
+                        {this.state.notetitle.touched && <ValidationError message={this.validateNotetitle()} />}
                         <label htmlFor='content'>Content</label>
                         <textarea 
                             onChange={e => this.updateNoteContext(e.target.value)}
                             name='content'>
                             </textarea>
-                        <label htmlFor='folderId'>Folder</label>
-                        <select name='folderId'>
+                        <label htmlFor='folder-select'>Folder</label>
+                        <select name='folder-select'>
                         {this.context.folders.map(folder => (
-                        <option key={folder.id} value={folder.id}>{folder.name}</option>
+                        <option key={folder.id} value={folder.id}>{folder.title}</option>
                         ))}
                         </select>
                         <button type='submit'>
@@ -115,8 +115,8 @@ export default class AddNote extends Component {
 
 AddNote.propTypes = {
     history: PropTypes.object,
-    name: PropTypes.string,
+    title: PropTypes.string,
     content: PropTypes.string,
-    folderId: PropTypes.number,
+    folder_id: PropTypes.number,
     modified: PropTypes.number
     }
