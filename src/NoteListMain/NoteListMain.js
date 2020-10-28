@@ -4,7 +4,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Note from '../Note/Note'
 import CircleButton from '../CircleButton/CircleButton'
 import ApiContext from '../ApiContext'
-import { getNotesForFolder } from '../notes-helpers'
 import './NoteListMain.css'
 
 export default class NoteListMain extends React.Component {
@@ -16,13 +15,16 @@ export default class NoteListMain extends React.Component {
   static contextType = ApiContext
 
   render() {
-    const { folder_id } = this.props.match.params
-    const { notes=[] } = this.context
-    const notesForFolder = getNotesForFolder(notes, folder_id)
-    return (
+      let notes = this.context.notes
+      if (this.props.match.params.folder_id !== undefined) {
+        notes = this.context.notes.filter(note => 
+          note.folder_id === parseInt(this.props.match.params.folder_id)
+        )
+      }
+      return (
       <section className='NoteListMain'>
         <ul>
-          {notesForFolder.map(note =>
+          {notes.map(note =>
             <li key={note.id}>
               <Note
                 id={note.id}
